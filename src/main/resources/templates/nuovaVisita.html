@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserimento visita</title>
+</head>
+<body>
+
+<a href="homeMedico">Home</a> <br> <br>
+
+<h1>Inserimento Visita</h1>
+<h3 th:text = "'Paziente: ' + ${selectedPaziente.nome} + ' ' + ${selectedPaziente.cognome} "> Paziente NOME COGNOME </h3>
+
+<script type="text/javascript">
+<!--
+var data = new Date();
+var gg, mm, aaaa;
+gg = data.getDate() + "/";
+mm = data.getMonth() + 1 + "/";
+aaaa = data.getFullYear();
+document.write("<strong>Data visita</strong>: " + gg + mm + aaaa);
+-->
+</script>
+
+<br><br><strong>Report visita:</strong><br>
+<form action="addVisita" name="myForm" id="myForm">
+    <input type="hidden" name="id" th:value="${selectedPaziente.id}">
+    <textarea name="note"  rows="10" cols="80"></textarea>
+    <br><br>
+    <input type="submit">
+</form>
+
+<a href="cartellaPaziente?id = ABC" th:href="@{cartellaPaziente(id=${selectedPaziente.id})}" >Cartella clinica paziente</a>
+
+<br>
+<p><strong>Attenzione!</strong> Premendo il link <i> Cartella clinica paziente</i> la visita non verrà salvata.</p>
+<p>Per salvare la visita e scegliere se inserire una nuova prescrizione premere "Invia".</p>
+</body>
+</html>

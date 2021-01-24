@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CartellaClinica</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+</head>
+
+<body>
+
+<a href="homeMedico">Home</a><br><br>
+
+<button onclick ="javascript: self.print()" type = "button">Stampa questa pagina</button>
+<button onclick ="creaPdf()" type = "button">PDF Report storia clinica</button>
+<br>
+
+<h3 th:text = "'CARTELLA CLINICA DI: ' +  ${selectedPaziente.nome} + ' ' + ${selectedPaziente.cognome}"> CARTELLA CLINICA PAZIENTE X</h3>
+
+<a href="" th:href="paginaSegnalazione"> SEGNALA PROBLEMA URGENTE </a> <br><br>
+
+<a href="" th:href="@{nuovaDiagnosi(id=${selectedPaziente.id})}"> Inserimento diagnosi </a> <br>
+<a href="" th:href="@{nuovaVisita(id=${selectedPaziente.id})}"> Nuova visita </a> <br>
+
+
+<script type="text/javascript">
+function creaPdf() {
+	var doc = new jsPDF();
+	doc.text(20, 20, 'Dati paziente xxx');
+	doc.addPage();
+
+	doc.save('resocontopaziente.pdf');
+}
+</script>
+
+
+<p>
+    <div th:text = "'Paziente: ' +  ${selectedPaziente.nome} + ' ' + ${selectedPaziente.cognome}"> Nome e cognome </div>
+    <div th:text = "'Nato il: ' + ${selectedPaziente.dataNascita}"> Data nascita</div>
+    <div th:text = "'Codice fiscale: ' + ${selectedPaziente.codiceFiscale}"> Codice fiscale</div>
+</p>
+
+
+<h3> Diagnosi paziente </h3>
+<table border="1" name="tabellaDiagnosi">
+    <thead>
+    <tr>
+        <th> Diagnosi: </th>
+        <th> Data diagnosi </th>
+        <th> Pericoloso </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="diagnosi: ${selectedPaziente.diagnosi}">
+
+        <td th:text = "${diagnosi.nome}"> Diagnosi </td>
+        <td th:text = "${diagnosi.data}"> Data </td>
+        <td th:text = "${diagnosi.pericoloso}"> Pericolo </td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+<h3> Visite effettuate </h3>
+<table border="1" name="tabellaVisite">
+    <thead>
+    <tr>
+        <th> Data </th>
+        <th> Note </th>
+        <th> Link report visita</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="visita: ${visitePaziente}">
+
+        <td th:text = "${visita.dataVisita}"> Data </td>
+        <td th:text = "${visita.report}"> Note </td>
+        <td><a href="reportVisita?id = ABC" th:href="@{reportVisita(idVisita=${visita.id})}" > Report </a></td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

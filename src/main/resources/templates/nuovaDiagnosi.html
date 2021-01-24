@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserimento diagnosi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+
+<a href="homeMedico">Home</a> <br> <br>
+
+
+<p>
+    <font color='red'>
+        <strong><div th:text="${erroreDiagnosi}">Prova</div></strong>
+
+    </font>
+</p>
+
+<h1> Inserimento diagnosi </h1>
+<h4>Consente di inserire una diagnosi, le note e lo stato di pericolosità del paziente. </h4>
+
+<p th:text = "'Signor: ' + ${selectedPaziente.nome} + ' ' + ${selectedPaziente.cognome} "></p>
+
+<form method="post" th:action="@{aggiuntaDiagnosi(id=${selectedPaziente.id})}" name="inserimento" >
+
+    <table>
+
+        <tr>
+            <td style="width: 50%"><strong>Diagnosi:</strong></td>
+            <td style="width: 50%" ><input type="text" name="nomediagnosi"></td>
+        </tr>
+
+        <tr>
+            <td><strong>Note:</strong></td>
+            <td><textarea type="text" name="note"></textarea></td>
+        </tr>
+
+        <tr>
+            <td><strong>Pericolosità:</strong></td>
+            <td><input type="radio" id="pericoloNo" name="pericolo" value="No" checked="checked">
+                <label for="pericoloNo">Non pericoloso</label><br>
+                <input type="radio" id="pericoloSi" name="pericolo" value="Si">
+                <label for="pericoloSi">Pericoloso</label><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" value="Invia">
+                <input type="reset" value="Annulla">
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+<br>
+<a href="cartellaPaziente?id = ABC" th:href="@{cartellaPaziente(id=${selectedPaziente.id})}" >Cartella clinica paziente</a>
+<br>
+<p><strong>Attenzione!</strong> Premendo il link <i> Cartella clinica paziente</i> la diagnosi non verrà salvata.</p>
+<p>Per salvare la diagnosi premere "Invia".</p>
+
+
+</body>
+</html>

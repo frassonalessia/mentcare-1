@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home medico</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<h1>BENVENUTO NEL SISTEMA DI CLINICHE MENTCARE!</h1>
+<h3> Lista pazienti in cura. </h3>
+<h4>Seleziona un paziente cliccando su cartella clinica:</h4>
+<table border="1" name="Pazienti">
+    <thead>
+    <tr>
+        <th> Nome </th>
+        <th> Cognome </th>
+        <th> DataNascita </th>
+        <th> Codice fiscale </th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="paz: ${pazienti}">
+
+        <td th:text = "${paz.nome}"> Nome </td>
+        <td th:text = "${paz.cognome}"> Cognome </td>
+        <td th:text = "${paz.dataNascita}"> Data nascita</td>
+        <td th:text = "${paz.codiceFiscale}"> Codice fiscale </td>
+        <td> <a href="cartellaPaziente?id = ABC" th:href="@{cartellaPaziente(id=${paz.id})}" /> Cartella clinica </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

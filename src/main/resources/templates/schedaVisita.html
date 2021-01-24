@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scheda visita</title>
+</head>
+
+
+<body>
+
+<a href="homeMedico">Home</a> <br> <br>
+
+<h2> Report visita </h2>
+<p>
+<div th:text="'Visitato il: ' + ${visita.dataVisita}">Data visita</div><br>
+<div th:text="${visita.report}"> Report visita:</div>
+</p>
+
+<div th:if="${aggiuntaAbilitata == true}">
+    <a href="" th:href="@{nuovaPrescrizione(idVisita=${visita.id})}" > Nuova prescrizione</a>
+</div>
+
+<h4>Farmaci prescritti:</h4>
+    <ul>
+        <li th:each="prescr: ${prescrizioni}" th:text="${prescr.farmaco.nome}"> Farmaco X</li>
+    </ul>
+
+
+</p>
+<br>
+<a href="" th:href="@{cartellaPaziente(id=${paziente.id})}" >Cartella clinica paziente</a>
+
+
+</body>

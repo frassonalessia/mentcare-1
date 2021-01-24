@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuova prescrizione</title>
+
+</head>
+<body>
+
+<a href="homeMedico">Home</a> <br> <br>
+
+
+<p>
+    <font color='red'>
+        <strong><div th:text="${MessagePrescrizione}">Prova</div></strong>
+
+    </font>
+</p>
+
+
+<form method="post" th:action="@{addPrescrizione(id=${idVisita})}" name="newPrescr">
+    <tr> <td>
+        <legend><strong>Farmaco:</strong></legend></td>
+    <td><select name="farmaco" >
+        <option value="-1"> -- </option>
+        <option th:each="f: ${farmaci}" th:text = "${f.nome}" th:value="${f.id}"> Nome farmaco </option>
+    </select></td>
+        <br></br>
+    <label for="descrizione"><strong>Note/frequenza:</strong></label>
+        <br></br>
+    <textarea id = "descrizione" name="descrizione" rows="4" cols="50"></textarea>
+    </tr>
+    <br></br>
+    <input type="submit">
+    <input type="reset" value="Annulla">
+
+</form>
+<br>
+<a href="cartellaPaziente?id = ABC" th:href="@{cartellaPaziente(id=${paziente.id})}" >Cartella clinica paziente</a>
+<br>
+<p><strong>Attenzione!</strong> Premendo il link <i> Cartella clinica paziente</i> la prescrizione non verrà salvata.</p>
+<p>Per salvare la prescrizione premere "Invia".</p>
+
+</body>
+</html>
