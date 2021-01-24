@@ -67,8 +67,8 @@ public class PazienteTest {
 
     @Test
     public void TestSetCognome() {
-        paz.setNome("Bianchi");
-        assertEquals("Bianchi", paz.getNome());
+        paz.setCognome("Bianchi");
+        assertEquals("Bianchi", paz.getCognome());
     }
 
 
